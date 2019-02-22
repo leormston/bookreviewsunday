@@ -28,7 +28,7 @@
     flex-wrap: nowrap;
     justify-content: center;
     align-items: center;
-    height: 500px;
+    height: 400px;
   }
 
   .line {
@@ -77,12 +77,18 @@
   }
 
   .book-image {
-    height: 500px;
+    height: 400px;
     padding: 10px
   }
   .summary {
     padding: 10px;
   }
+}
+
+.homepagebutton {
+  background-color: #34373d;
+  width: 100%;
+  color: white;
 }
 
 footer p  {

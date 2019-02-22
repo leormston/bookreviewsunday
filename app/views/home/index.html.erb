@@ -1,6 +1,8 @@
 
 
 <%@books.each do |book|%>
+<%@reviews = Review.where(book_id: book.id)%>
+<%@one_liners = Review.where(book_id: book.id).limit(3)%>
 <%if book.left%>
 
 <div class="flex-container-desktop">
@@ -20,17 +22,23 @@
   <div class="rightline"></div>
   <div class="right">
     <div class="summary">
-      <h3>10/10 - Amazing</h3>
-      <p>(24/02/19)</p>
+      <%if @reviews.count == 0%>
+        <h1>BRS Rating - NA/10</h1>
+      <%else%>
+        <%average_rating = @reviews.sum('rating') / @reviews.count%>
+        <h1>BRS Rating - <%=average_rating%>/10</h1>
+      <%end%>
+      <hr class="whitehr">
+      <p><%=book.created_at%></p>
       <hr>
       <ul>
-        <li><h4>Very interesting like a dog</h4></li>
-        <li><h4>The film was a poor representation of the book</h4></li>
-        <li><h4>A must read for anyone coming into science or astrophysics</h4></li>
+        <%@one_liners.each do |one_liner|%>
+        <li><h4><%=one_liner.one_liner%></h4></li>
+        <%end%>
       </ul>
       <%=form_with(url: 'review/show', method: 'get', local: true) do |form|%>
         <%=form.hidden_field :book_id, value: book.id%>
-        <h3><%=form.submit "View Reviews"%></h3>
+        <h3><%=form.submit "View Reviews", class:"homepagebutton"%></h3>
       <%end%>
     </div>
   </div>
@@ -40,17 +48,18 @@
 <div class="flex-container-desktop">
   <div class="right">
     <div class="summary">
-      <h3>10/10 - Amazing</h3>
-      <p>(24/02/19)</p>
-      <hr>
-      <ul>
-        <li><h4>Very interesting like a dog</h4></li>
-        <li><h4>The film was a poor representation of the book</h4></li>
-        <li><h4>A must read for anyone coming into science or astrophysics</h4></li>
+      <%if @reviews.count == 0%>
+        <h1>BRS Rating - NA/10</h1>
+      <%else%>
+        <%average_rating = @reviews.sum('rating') / @reviews.count%>
+        <h1>BRS Rating - <%=average_rating%>/10</h1>
+      <%end%>
+      <hr class="whitehr">
+      <p><%=book.created_at%></p>
       </ul>
       <%=form_with(url: 'review/show', method: 'get', local: true) do |form|%>
         <%=form.hidden_field :book_id, value: book.id%>
-        <h3><%=form.submit "View Reviews"%></h3>
+        <h3><%=form.submit "View Reviews", class:"homepagebutton"%></h3>
       <%end%>
     </div>
   </div>
