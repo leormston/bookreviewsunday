@@ -1,0 +1,90 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#homejumbotron {
+  background-image: url("jumbotron-background.jpeg");
+  background-size: cover;
+  border-bottom : 10px solid orange;
+  text-align: center;
+}
+
+.title {
+  font-size: 7vw;
+
+  font-family: 'Quicksand', sans-serif;
+}
+
+#curatedby{
+  font-family: 'Parisienne', cursive;
+}
+
+@media screen and (min-width: 1000px) {
+  /*FOR DESKTOP*/
+  .flex-container-desktop {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 500px;
+  }
+
+  .line {
+    background-color: orange;
+    height: 100%;
+    align-items: center;
+    width: 2%;
+  }
+
+
+  .left {
+    text-align: right;
+    width: 40%;
+    height: 90%;
+    align-items: center;
+
+  }
+
+  .leftline {
+    width: 4%;
+    height: 10px;
+    background-color: orange;
+  }
+
+  .right {
+
+    background-color: orange;
+    width: 40%;
+  }
+
+  .rightline {
+
+    background-color: orange;
+    width: 4%;
+    height: 10px;
+  }
+
+  .bookinfo {
+    border: solid orange 10px;
+    background-color: orange;
+  }
+
+  .mini {
+    background-color: orange;
+    align-items: center;
+  }
+
+  .book-image {
+    height: 500px;
+    padding: 10px
+  }
+  .summary {
+    padding: 10px;
+  }
+}
+
+footer p  {
+  background-color: orange;
+}

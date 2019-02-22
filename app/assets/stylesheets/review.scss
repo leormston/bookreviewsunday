@@ -1,0 +1,100 @@
+.book-review-image {
+  height: 300px;
+}
+
+.image-inline-align {
+  text-align: right;
+}
+
+.author-review-image {
+  height: 50px;
+  border: 1px solid orange;
+}
+
+#description {
+  border-bottom: solid orange 10px;
+  padding: 10px;
+}
+
+hr {
+  border: solid orange 1px;
+}
+
+.form_styling {
+  border: 2px solid orange;
+}
+
+.reviewbox {
+  background-color: orange;
+  padding: 10px;
+  border: solid 20px #34373d;
+  border-radius: 30px;
+}
+
+
+
+.submitreviewbuttonarea {
+  text-align: center;
+}
+
+.submitreviewbutton {
+  background-color: orange;
+  color: white;
+  width: 100%
+}
+// Description at top for desktop
+@media screen and (min-width: 992px) {
+  .reviewsection {
+    border-left: solid orange 10px;
+    position: fixed;
+    width: 25%;
+    height: 100%;
+    left: 75%;
+    top: 80px;
+  }
+
+  .imagemobile {
+    display:none;
+  }
+
+}
+
+
+
+// Description at top for mobile
+@media screen and (max-width: 992px) {
+  .reviewsection {
+    text-align: center;
+  }
+
+  .imagedesktop {
+    display: none;
+  }
+
+  .book-review-image-mobile {
+    width: 100%;
+  }
+
+  .imagemobile p {
+    text-align: center;
+    padding-left: 25%;
+    padding-right: 25%;
+  }
+
+  .descriptiontext {
+    text-align: center;
+  }
+
+
+  #rating {
+    background-color: orange;
+  }
+
+  #rating h1 {
+    text-align: center;
+  }
+}
+
+footer p {
+  background-color: #34373d;
+}

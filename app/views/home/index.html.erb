@@ -1,0 +1,108 @@
+
+
+<%@books.each do |book|%>
+<%if book.left%>
+
+<div class="flex-container-desktop">
+  <div class="left">
+    <div class="flex-container-desktop mini">
+      <div>
+        <h1><%=book.author%> : <%=book.title%></h1>
+        <p><%=book.created_at%> </p>
+      </div>
+      <div>
+        <%=image_tag(book.cover_image, class: "book-image")%>
+      </div>
+    </div>
+  </div>
+  <div class="leftline"></div>
+  <div class="line"></div>
+  <div class="rightline"></div>
+  <div class="right">
+    <div class="summary">
+      <h3>10/10 - Amazing</h3>
+      <p>(24/02/19)</p>
+      <hr>
+      <ul>
+        <li><h4>Very interesting like a dog</h4></li>
+        <li><h4>The film was a poor representation of the book</h4></li>
+        <li><h4>A must read for anyone coming into science or astrophysics</h4></li>
+      </ul>
+      <%=form_with(url: 'review/show', method: 'get', local: true) do |form|%>
+        <%=form.hidden_field :book_id, value: book.id%>
+        <h3><%=form.submit "View Reviews"%></h3>
+      <%end%>
+    </div>
+  </div>
+</div>
+
+<%else%>
+<div class="flex-container-desktop">
+  <div class="right">
+    <div class="summary">
+      <h3>10/10 - Amazing</h3>
+      <p>(24/02/19)</p>
+      <hr>
+      <ul>
+        <li><h4>Very interesting like a dog</h4></li>
+        <li><h4>The film was a poor representation of the book</h4></li>
+        <li><h4>A must read for anyone coming into science or astrophysics</h4></li>
+      </ul>
+      <%=form_with(url: 'review/show', method: 'get', local: true) do |form|%>
+        <%=form.hidden_field :book_id, value: book.id%>
+        <h3><%=form.submit "View Reviews"%></h3>
+      <%end%>
+    </div>
+  </div>
+  <div class="leftline"></div>
+  <div class="line"></div>
+  <div class="rightline"></div>
+  <div class="right">
+    <div class="flex-container-desktop mini">
+      <div>
+        <h1><%=book.author%> : <%=book.title%></h1>
+        <p><%=book.created_at%> </p>
+      </div>
+      <div>
+        <%=image_tag(book.cover_image, class: "book-image")%>
+      </div>
+    </div>
+  </div>
+</div>
+<%end%>
+<%end%>
+
+<%@books.each do |book|%>
+<%@reviews = Review.where(book_id: book.id)%>
+<div class="flex-container-mobile">
+  <div class="line-left-mobile">
+    <p></p>
+  </div>
+  <div class="center-mobile">
+    <h1><%=book.title%></h1>
+    <h4><%=book.author%></h4>
+    <hr class="whitehr">
+    <div class="row">
+      <div class="col-6">
+        <%=image_tag(book.cover_image, class: "mobile-book-image")%>
+      </div>
+      <div class="col-6">
+        <%if @reviews.count == 0%>
+          <h1>BRS Rating - NA/10</h1>
+        <%else%>
+          <%average_rating = @reviews.sum('rating') / @reviews.count%>
+          <h1>BRS Rating - <%=average_rating%>/10</h1>
+        <%end%>
+      </div>
+    </div>
+    <h5 style="text-align: center; padding-top: 10px;">Currently <%=@reviews.count%> reviews!</h5>
+    <%=form_with(url: 'review/show', method: 'get', local: true) do |form|%>
+      <%=form.hidden_field :book_id, value: book.id%>
+      <h3><%=form.submit "View Reviews", class:"submitreviewbuttonmobile"%></h3>
+    <%end%>
+  </div>
+  <div class="line-right-mobile">
+    <p></p>
+  </div>
+</div>
+<%end%>

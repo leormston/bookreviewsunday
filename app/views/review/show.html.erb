@@ -1,0 +1,84 @@
+<div class="row">
+  <div class="col-12 col-md-9">
+    <div class="row" id="description">
+      <section class="imagemobile">
+        <div class="col-12">
+          <p><%=image_tag(@book.cover_image, class: "book-review-image-mobile")%></p>
+          <section id="rating">
+            <h1>6/10</h1>
+          </section>
+        </div>
+      </section>
+      <div class="col-sm-9 col-12 descriptiontext">
+        <h1 id="booktitle"><%=@book.title%></h1>
+        <div class="authorborder">
+          <h5 class="author-review-image"><%=image_tag(@book.author_image, class: "author-review-image")%>Author: <%=@book.author%></h5>
+        </div>
+        <h5><%=@book.blurb%></h5>
+        <%if @reviews.count != 0%>
+          <%average_rating = @reviews.sum('rating') / @reviews.count%>
+          <h1>BRS Rating - <%=average_rating%>/10</h1>
+        <%else%>
+          <h1>BRS Rating - Not Rated</h1>
+        <%end%>
+      </div>
+      <section class="imagedesktop">
+        <div class="col-md-3 col-0">
+          <p class="image-inline-align"><%=image_tag(@book.cover_image, class: "book-review-image")%>
+
+          </p>
+        </div>
+      <section>
+    </div>
+    <h2>Community Reviews</h2>
+    <hr>
+    <%if @reviews.count == 0%>
+      <div class="reviewbox">
+        <h1><strong>No Reviews to see here</strong></h1>
+      </div>
+    <%else%>
+      <%@reviews.each do |review|%>
+        <div class="reviewbox">
+          <h1><strong><%=review.rating%>/10 - <%=review.one_liner%></strong></h1>
+          <hr class="whitehr">
+          <p><%=review.positive%></p>
+          <p><%=review.negative%></p>
+          <h5 style="text-align: right;"><%=review.name%>-<%=review.created_at%></h5>
+        </div>
+      <%end%>
+    <%end%>
+  </div>
+
+  <div class="col-md-4 col-0 reviewsection">
+    <%=form_with(url: '/review/publish', method: 'post', local: true) do |form|%>
+      <%=form.hidden_field :book_id, value: @book.id%>
+      <h2>Tell us what you think: </h2>
+      <hr>
+      <div>
+        <h3><%=form.label :name%></h3>
+        <%=form.text_area :name, class: "form_styling", cols: "35", rows: "1"%>
+      </div>
+
+      <div>
+        <h3><%=form.label :one_liner%></h3>
+        <%=form.text_area :one_liner, class: "form_styling", cols: "35", rows: "3"%>
+      </div>
+
+      <div>
+        <h3><%=form.label :positive%></h3>
+      <%=form.text_area :positive, class: "form_styling", cols: "35", rows: "6"%>
+      </div>
+
+      <div>
+        <h3><%=form.label :negative%></h3>
+        <%=form.text_area :negative, class: "form_styling", cols: "35", rows: "6"%>
+      </div>
+
+      <div>
+        <h1><%=form.label :rating%> <%= form.select(:rating, Review::RATING_LIST)%><h1>
+      </div>
+
+      <h1 class="submitreviewbuttonarea"><%=form.submit "Post Review", class:"submitreviewbutton"%></h1>
+    <%end%>
+  </div>
+</div>

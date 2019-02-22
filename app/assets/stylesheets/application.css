@@ -1,0 +1,92 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+ body {
+   color: white;
+   font-family: 'Quicksand', sans-serif;
+   background-color: #34373d;
+   overflow: auto;
+ }
+
+.customnavbar {
+  text-align: center;
+  font-family: 'ZCOOL QingKe HuangYou', cursive;
+  font-size: 3vw;
+  box-shadow: 0 6px 14px 0 rgba(0,0,0,0.35);
+}
+a:visited { text-decoration: none; color:white; }
+a:focus { text-decoration: none; color:yellow; }
+a:hover, a:active { text-decoration: none; color:lightgrey; letter-spacing: 1.8rem; transition: 600ms ease;}
+
+.whitehr {
+  border: white solid 1px;
+}
+
+.flex-container-mobile {
+  display: none;
+}
+
+@media screen and (max-width: 992px) {
+  .customnavbar {
+    font-size: 6vw;
+  }
+
+  .flex-container-desktop {
+    display: none;
+  }
+  .flex-container-mobile {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    align-items: center;
+    height: 600px;
+  }
+
+  .center-mobile {
+    width:90%;
+    height: 560px;
+    background-color: orange;
+    padding: 10px;
+    border: solid 20px #34373d;
+    border-radius: 30px;
+  }
+
+  .line-right-mobile,
+  .line-left-mobile {
+    width: 2%;
+    background-color: #34373d;
+  }
+  .mobile-book-image {
+    width: 100%;
+  }
+  .submitreviewbuttonmobile {
+    background-color: #34373d;
+    color: white;
+    width: 100%
+  }
+}
+
+@media screen and (min width: 992px) {
+  .flex-container-mobile {
+    display: none;
+  }
+}
+
+
+footer {
+  text-align: center;
+  padding-top: 100px;
+}
