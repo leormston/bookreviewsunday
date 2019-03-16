@@ -35,12 +35,21 @@
       </div>
     <%else%>
       <%@reviews.each do |review|%>
-        <div class="reviewbox">
+        <div class="reviewbox" id='c_review<%=review.id%>'>
           <h1><strong><%=review.rating%>/10 - <%=review.one_liner%></strong></h1>
           <hr class="whitehr">
           <p><%=review.positive%></p>
           <p><%=review.negative%></p>
           <h5 style="text-align: right;"><%=review.name%>-<%=review.created_at%></h5>
+          <h5 style="text-align: left;">
+            <%=review.upvotes%>
+            <%=form_with(url: '/review/upvote', method: 'post' ,local: true) do |form|%>
+              <%=form.hidden_field :book_id, value: @book.id%>
+              <%=form.hidden_field :review_id, value: review.id%>
+              <%=form.submit "Upvote"%>
+            <%end%>
+
+          </h5>
         </div>
       <%end%>
     <%end%>
