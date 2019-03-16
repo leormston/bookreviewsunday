@@ -5,9 +5,24 @@ class ReviewController < ApplicationController
   end
 
   def show
+
     book_id = params[:book_id]
     @book = Book.find(book_id)
     @reviews = Review.where(book_id: params[:book_id])
+    if params[:sort_by]
+      if params[:sort_by] == "Most Upvoted"
+        @reviews = @reviews.order(upvotes: :desc)
+      end
+      if params[:sort_by] == "Least Upvoted"
+        @reviews = @reviews.order(:upvotes)
+      end
+      if params[:sort_by] == "Oldest"
+        @reviews = @reviews.order(:created_at)
+      end
+      if params[:sort_by] == "Latest"
+        @reviews = @reviews.order(created_at: :desc)
+      end
+    end
   end
 
   def publish

@@ -13,8 +13,8 @@
         </div>
         <h5><%=@book.blurb%></h5>
         <%if @reviews.count != 0%>
-          <%average_rating = @reviews.sum('rating') / @reviews.count%>
-          <h1>BRS Rating - <%=average_rating%>/10</h1>
+          <%average_rating = @reviews.sum('rating').to_f / @reviews.count.to_f%>
+          <h1>BRS Rating - <%=average_rating.to_s%>/10</h1>
         <%else%>
           <h1>BRS Rating - Not Rated</h1>
         <%end%>
@@ -27,7 +27,16 @@
         </div>
       <section>
     </div>
-    <h2>Community Reviews</h2>
+
+    <div class="sort">
+      <h2>Community Reviews</h2>
+      <%=form_with(url: '/review/show', method: 'post', local: true) do |form|%>
+        <%=form.label :sort_by%> <%= form.select(:sort_by, Review::REVIEW_CHOICE)%>
+        <%=form.hidden_field :book_id, value: @book.id%>
+        <%=form.submit "Sort"%>
+      <%end%>
+    </div>
+
     <hr>
     <%if @reviews.count == 0%>
       <div class="reviewbox">
